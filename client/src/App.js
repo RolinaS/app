@@ -1,23 +1,37 @@
-import axios from 'axios';
-import './App.css';
-
-//data will be the string we send from our server
-const apiCall = () => {
-  axios.get('http://localhost:3000').then((data) => {
-    //this console.log will be in our frontend console
-    console.log(data)
-  })
-}
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Menu from './components/Menu';
+import Fruits from './views/aliments/Fruits';
+import Legumes from './views/aliments/Légumes';
+import Viandes from './views/aliments/Viandes';
+import Poissons from './views/aliments/Poissons';
+import Noix from './views/aliments/Noix';
+import Dejeuner from './views/repas/Dejeuner';
+import PetitDejeuner from './views/repas/PetitDejeuner';
+import Diner from './views/repas/Diner';
+import Colation from './views/repas/Collation';
+import Suivit from './views/Suivit';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-
-        <button onClick={apiCall}>Make API Call</button>
-
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Menu />
+        <Routes>
+          <Route path="/fruits" element={<Fruits />} />
+          <Route path="/viandes" element={<Viandes />} />
+          <Route path="/legumes" element={<Legumes />} />
+          <Route path="/poissons" element={<Poissons />} />
+          <Route path="/noix" element={<Noix />} />
+           <Route path="/dejeuner" element={<Dejeuner />} />
+          <Route path="/petit-dejeuner" element={<PetitDejeuner />} />
+          <Route path="/diner" element={<Diner />} />
+          <Route path="/colation" element={<Colation />} />
+          <Route path="/suivit" element={<Suivit />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
