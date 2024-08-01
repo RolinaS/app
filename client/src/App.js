@@ -24,7 +24,7 @@ function App() {
           <Route path="/legumes" element={<Legumes />} />
           <Route path="/poissons" element={<Poissons />} />
           <Route path="/noix" element={<Noix />} />
-           <Route path="/dejeuner" element={<Dejeuner />} />
+          <Route path="/dejeuner" element={<Dejeuner />} />
           <Route path="/petit-dejeuner" element={<PetitDejeuner />} />
           <Route path="/diner" element={<Diner />} />
           <Route path="/colation" element={<Colation />} />
