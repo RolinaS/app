@@ -9,7 +9,7 @@ function Laitiers() {
     // Fonction pour récupérer les données de l'API
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/laitiers');
+        const response = await axios.get('http://localhost:3000/api/aliments/laitiers');
         setData(response.data);
       } catch (error) {
         console.error('Erreur lors de la récupération des données', error);

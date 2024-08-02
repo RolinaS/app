@@ -24,7 +24,7 @@ db.connect(err => {
 });
 
 // Route pour récupérer les aliments en fonction de leur catégorie
-app.get('/api/:aliment', (req, res) => {
+app.get('/api/aliments/:aliment', (req, res) => {
   const aliment = req.params.aliment;
   console.log(`Requête pour la catégorie : ${aliment}`);
 
@@ -44,6 +44,34 @@ app.get('/api/:aliment', (req, res) => {
     if (result.length === 0) {
       console.log(`Aucun aliment trouvé pour la catégorie : ${aliment}`);
       res.status(404).send(`Aucun aliment trouvé pour la catégorie : ${aliment}`);
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+// Route pour récupérer les aliments en fonction de leur catégorie
+app.get('/api/repas/:lunch', (req, res) => {
+  const lunch = req.params.lunch;
+  console.log(`Requête pour la catégorie : ${lunch}`);
+
+  const sql = `
+    SELECT Recette.*
+    FROM Recette 
+    INNER JOIN Recette_Repas  ON Recette_Repas.recette_id = Recette.id
+    INNER JOIN Repas ON Repas.id = Recette_Repas.repas_id
+    WHERE Repas.nom = ?
+  `;
+
+  db.query(sql, [lunch], (err, result) => {
+    if (err) {
+      console.error('Erreur lors de la récupération des données:', err);
+      res.status(500).send('Erreur lors de la récupération des données');
+      return;
+    }
+    if (result.length === 0) {
+      console.log(`Aucun aliment trouvé pour la catégorie : ${lunch}`);
+      res.status(404).send(`Aucun aliment trouvé pour la catégorie : ${lunch}`);
     } else {
       res.json(result);
     }
