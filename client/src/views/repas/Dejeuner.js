@@ -1,6 +1,7 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Dejeuner() {
   const [data, setData] = useState([]);
@@ -40,7 +41,7 @@ function Dejeuner() {
             {data.length > 0 ? (
               data.map((item, index) => (
                 <tr key={index}>
-                  <td>{item.nom}</td>
+                  <Link to={`/recette/${encodeURIComponent(item.nom)}`}>{item.nom}</Link>
                   <td>{item.description}</td> {/* Assurez-vous que les noms des propriétés correspondent */}
                 </tr>
               ))

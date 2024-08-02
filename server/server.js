@@ -78,6 +78,46 @@ app.get('/api/repas/:lunch', (req, res) => {
   });
 });
 
+app.get('/api/recettes/:nom', (req, res) => {
+  const recetteNom = decodeURIComponent(req.params.nom); // Décodage de l'URL
+  console.log(`Requête pour la recette : ${recetteNom}`);
+
+  const sql = `
+    SELECT Recette.nom, Recette.description, Aliment.nom as aliment_nom, Aliment.proteines, Aliment.glucides, Aliment.lipides, Aliment.kcal
+    FROM Recette
+    JOIN Recette_Aliment ON Recette.id = Recette_Aliment.recette_id
+    JOIN Aliment ON Recette_Aliment.aliment_id = Aliment.id
+    WHERE Recette.nom = ?
+  `;
+
+  db.query(sql, [recetteNom], (err, results) => {
+    if (err) {
+      console.error('Erreur lors de la récupération des données:', err);
+      res.status(500).send('Erreur lors de la récupération des données');
+      return;
+    }
+
+    if (results.length === 0) {
+      res.status(404).send(`Aucune recette trouvée pour le nom : ${recetteNom}`);
+      return;
+    }
+
+    const recette = {
+      nom: results[0].nom,
+      description: results[0].description,
+      aliments: results.map(row => ({
+        nom: row.aliment_nom,
+        proteines: row.proteines,
+        glucides: row.glucides,
+        lipides: row.lipides,
+        kcal: row.kcal
+      }))
+    };
+
+    res.json(recette);
+  });
+});
+
 app.listen(3000, () => {
   console.log('Serveur à l\'écoute sur le port 3000');
 });

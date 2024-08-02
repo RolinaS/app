@@ -14,6 +14,7 @@ import Dejeuner from './views/repas/Dejeuner';
 import PetitDejeuner from './views/repas/PetitDejeuner';
 import Diner from './views/repas/Diner';
 import Colation from './views/repas/Collation';
+import Recette from './views/Recette';
 import Suivit from './views/Suivit';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/petit-dejeuner" element={<PetitDejeuner />} />
           <Route path="/diner" element={<Diner />} />
           <Route path="/colation" element={<Colation />} />
+          <Route path="/recette/:nom" element={<Recette />} />
           <Route path="/suivit" element={<Suivit />} />
         </Routes>
       </div>
