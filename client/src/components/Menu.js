@@ -12,6 +12,9 @@ function Menu() {
           <NavDropdown title="Aliment" id="basic-nav-dropdown">
             <NavDropdown.Item as={Link} to="/fruits">Fruits</NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/legumes">Légumes</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/laitiers">Laitiers</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/feculents">Féculents</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/oeufs">Oeufs</NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/viandes">Viandes</NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/poissons">Poissons</NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/noix">Noix</NavDropdown.Item>

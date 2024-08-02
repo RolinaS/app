@@ -23,90 +23,32 @@ db.connect(err => {
   console.log('Connecté à la base de données MySQL');
 });
 
-// Route pour récupérer les données des différents fruits
-app.get('/api/fruits', (req, res) => {
-  const sql = 'SELECT * FROM Fruits'; // Remplacez 'your_table' par le nom de votre table
-  db.query(sql, (err, result) => {
+// Route pour récupérer les aliments en fonction de leur catégorie
+app.get('/api/:aliment', (req, res) => {
+  const aliment = req.params.aliment;
+  console.log(`Requête pour la catégorie : ${aliment}`);
+
+  const sql = `
+    SELECT Aliment.*
+    FROM Aliment
+    INNER JOIN CategorieAliment ON CategorieAliment.id = Aliment.categorie_id
+    WHERE CategorieAliment.nom = ?
+  `;
+
+  db.query(sql, [aliment], (err, result) => {
     if (err) {
+      console.error('Erreur lors de la récupération des données:', err);
       res.status(500).send('Erreur lors de la récupération des données');
       return;
     }
-    res.json(result);
+    if (result.length === 0) {
+      console.log(`Aucun aliment trouvé pour la catégorie : ${aliment}`);
+      res.status(404).send(`Aucun aliment trouvé pour la catégorie : ${aliment}`);
+    } else {
+      res.json(result);
+    }
   });
 });
-
-// Route pour récupérer les données des différents légumes
-app.get('/api/legumes', (req, res) => {
-      const sql = 'SELECT * FROM Légumes'; // Remplacez 'your_table' par le nom de votre table
-      db.query(sql, (err, result) => {
-        if (err) {
-          res.status(500).send('Erreur lors de la récupération des données');
-          return;
-        }
-        res.json(result);
-      });
-    });
-
-// Route pour récupérer les données des différentes viandes
-app.get('/api/viandes', (req, res) => {
-      const sql = 'SELECT * FROM Viandes'; // Remplacez 'your_table' par le nom de votre table
-      db.query(sql, (err, result) => {
-        if (err) {
-          res.status(500).send('Erreur lors de la récupération des données');
-          return;
-        }
-        res.json(result);
-      });
-    });
-
-// Route pour récupérer les données des différents poissons
-app.get('/api/poissons', (req, res) => {
-      const sql = 'SELECT * FROM Poissons'; // Remplacez 'your_table' par le nom de votre table
-      db.query(sql, (err, result) => {
-        if (err) {
-          res.status(500).send('Erreur lors de la récupération des données');
-          return;
-        }
-        res.json(result);
-      });
-    });
-
-// Route pour récupérer les données des différentes noix
-app.get('/api/noix', (req, res) => {
-      const sql = 'SELECT * FROM Noix'; // Remplacez 'your_table' par le nom de votre table
-      db.query(sql, (err, result) => {
-        if (err) {
-          res.status(500).send('Erreur lors de la récupération des données');
-          return;
-        }
-        res.json(result);
-      });
-    });
-
-// Route pour récupérer les données des oeufs
-app.get('/api/oeufs', (req, res) => {
-      const sql = 'SELECT * FROM Oeufs'; // Remplacez 'your_table' par le nom de votre table
-      db.query(sql, (err, result) => {
-        if (err) {
-          res.status(500).send('Erreur lors de la récupération des données');
-          return;
-        }
-        res.json(result);
-      });
-    });
-
-// Route pour récupérer les données des différents produits laitiers
-app.get('/api/laitiers', (req, res) => {
-      const sql = 'SELECT * FROM Laitiers'; // Remplacez 'your_table' par le nom de votre table
-      db.query(sql, (err, result) => {
-        if (err) {
-          res.status(500).send('Erreur lors de la récupération des données');
-          return;
-        }
-        res.json(result);
-      });
-    });
-
 
 app.listen(3000, () => {
   console.log('Serveur à l\'écoute sur le port 3000');

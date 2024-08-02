@@ -4,7 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Menu from './components/Menu';
 import Fruits from './views/aliments/Fruits';
 import Legumes from './views/aliments/Légumes';
+import Laitiers from './views/aliments/Laitiers';
+import Féculents from './views/aliments/Féculents';
 import Viandes from './views/aliments/Viandes';
+import Oeufs from './views/aliments/Oeufs';
 import Poissons from './views/aliments/Poissons';
 import Noix from './views/aliments/Noix';
 import Dejeuner from './views/repas/Dejeuner';
@@ -22,7 +25,10 @@ function App() {
           <Route path="/fruits" element={<Fruits />} />
           <Route path="/viandes" element={<Viandes />} />
           <Route path="/legumes" element={<Legumes />} />
+          <Route path="/laitiers" element={<Laitiers />} />
+          <Route path="/feculents" element={<Féculents />} />
           <Route path="/poissons" element={<Poissons />} />
+          <Route path="/oeufs" element={<Oeufs />} />
           <Route path="/noix" element={<Noix />} />
           <Route path="/dejeuner" element={<Dejeuner />} />
           <Route path="/petit-dejeuner" element={<PetitDejeuner />} />
