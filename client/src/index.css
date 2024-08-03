@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.graph-container {
+  width: 100%;
+  height: 400px; /* Ajustez la hauteur selon vos besoins */
+  margin: 0 auto;
+  position: relative; /* Nécessaire pour le positionnement responsive */
+}
+
+.graph-container canvas {
+  width: 100% !important; /* Assure que le graphique utilise toute la largeur disponible */
+  height: 100% !important; /* Assure que le graphique utilise toute la hauteur disponible */
+}

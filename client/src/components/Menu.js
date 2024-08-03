@@ -20,8 +20,8 @@ function Menu() {
             <NavDropdown.Item as={Link} to="/noix">Noix</NavDropdown.Item>
           </NavDropdown>
           <NavDropdown title="Repas" id="basic-nav-dropdown">
-            <NavDropdown.Item as={Link} to="/dejeuner">Déjeuner</NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/petit-dejeuner">Petit Déjeuner</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/dejeuner">Déjeuner</NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/diner">Dîner</NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/colation">Colation</NavDropdown.Item>
           </NavDropdown>

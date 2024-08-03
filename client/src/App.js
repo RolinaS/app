@@ -16,6 +16,7 @@ import Diner from './views/repas/Diner';
 import Colation from './views/repas/Collation';
 import Recette from './views/Recette';
 import Suivit from './views/Suivit';
+import Graphique from './components/Graphique';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="/colation" element={<Colation />} />
           <Route path="/recette/:nom" element={<Recette />} />
           <Route path="/suivit" element={<Suivit />} />
+          <Route path="/" element={<Graphique />} />
         </Routes>
       </div>
     </Router>
