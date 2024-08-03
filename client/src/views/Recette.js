@@ -30,6 +30,18 @@ function Recette() {
     return <div>Chargement...</div>;
   }
 
+  // Calcul des totaux des macros
+  const totalMacros = data.aliments.reduce(
+    (totals, item) => {
+      totals.proteines += parseFloat(item.proteines) || 0;
+      totals.glucides += parseFloat(item.glucides) || 0;
+      totals.lipides += parseFloat(item.lipides) || 0;
+      totals.kcal += parseFloat(item.kcal) || 0;
+      return totals;
+    },
+    { proteines: 0, glucides: 0, lipides: 0, kcal: 0 }
+  );
+
   return (
     <div className="App">
       <header className="App-header">
@@ -56,6 +68,25 @@ function Recette() {
                 <td>{item.kcal}</td>
               </tr>
             ))}
+          </tbody>
+        </Table>
+        <h4>Totaux</h4>
+        <Table striped bordered hover responsive>
+          <thead>
+            <tr>
+              <th>Protéines (g)</th>
+              <th>Glucides (g)</th>
+              <th>Lipides (g)</th>
+              <th>Kcal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{totalMacros.proteines.toFixed(2)}</td>
+              <td>{totalMacros.glucides.toFixed(2)}</td>
+              <td>{totalMacros.lipides.toFixed(2)}</td>
+              <td>{totalMacros.kcal.toFixed(2)}</td>
+            </tr>
           </tbody>
         </Table>
       </header>
