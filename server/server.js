@@ -118,6 +118,47 @@ app.get('/api/recettes/:nom', (req, res) => {
   });
 });
 
+app.get('/api/suivit', (req, res) => {
+  const sql = `
+    SELECT Recette.nom AS recette_nom, Repas.nom AS repas_nom, Recette_Repas.jour
+    FROM Recette_Repas
+    JOIN Recette ON Recette_Repas.recette_id = Recette.id
+    JOIN Repas ON Recette_Repas.repas_id = Repas.id
+    ORDER BY Recette_Repas.jour, Repas.nom
+  `;
+
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error('Erreur lors de la récupération des données:', err);
+      res.status(500).send('Erreur lors de la récupération des données');
+      return;
+    }
+
+    // Regrouper les résultats par jour
+    const suivit = results.reduce((acc, row) => {
+      const jour = row.jour;
+      if (!acc[jour]) {
+        acc[jour] = {
+          jour,
+          petitDejeuner: null,
+          dejeuner: null,
+          diner: null,
+          collation: null,
+        };
+      }
+
+      acc[jour][row.repas_nom.toLowerCase()] = row.recette_nom;
+
+      return acc;
+    }, {});
+
+    // Convertir l'objet en tableau
+    res.json(Object.values(suivit));
+  });
+});
+
+
+
 app.listen(3000, () => {
   console.log('Serveur à l\'écoute sur le port 3000');
 });
